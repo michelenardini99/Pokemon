@@ -9,6 +9,13 @@ public class PlayerController : MonoBehaviour
     private bool isMoving;
     private Vector2 input;
 
+    private Animator animator;
+
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -17,8 +24,19 @@ public class PlayerController : MonoBehaviour
             input.x = Input.GetAxisRaw("Horizontal");
             input.y = Input.GetAxisRaw("Vertical");
 
+            //delete diagonal movement
+            if(input.x != 0)
+            {
+                input.y = 0;
+            }
+
             if(input != Vector2.zero)   //player is moving
             {
+
+                //set animation position 
+                animator.SetFloat("moveX", input.x);
+                animator.SetFloat("moveY", input.y);
+
                 var targetPos = transform.position;     //transform.postion == current position of the player
                 targetPos.x += input.x;
                 targetPos.y += input.y; 
@@ -26,6 +44,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine(Move(targetPos));
             }
         }
+        animator.SetBool("isMoving", isMoving);
     }
 
     IEnumerator Move(Vector3 targetPos)
