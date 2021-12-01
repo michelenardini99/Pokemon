@@ -2,17 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveBase : MonoBehaviour
+[CreateAssetMenu(fileName = "Move", menuName = "Pokemon/Create new Move")]
+public class MoveBase : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] string name;
+
+    [TextArea]
+    [SerializeField] string description;
+
+    [SerializeField] PokemonType type;
+    [SerializeField] int power;
+    [SerializeField] int accuracy;
+    [SerializeField] int pp;
+
+    public string Name
     {
-        
+        get { return name; }    
     }
 
-    // Update is called once per frame
-    void Update()
+    public string Description
     {
-        
+        get { return description; }
     }
+
+    public PokemonType Type
+    {
+        get { return type; }
+    }
+
+    public int Power
+    {
+        get { return power; }
+    }
+
+    public int Accuracy
+    {
+        get { return accuracy; }
+    }
+
+    public int PP
+    {
+        get { return pp; }
+    }
+   
 }
